@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="600px" height="350px" style="background-color: #fff;"></canvas>
+    <script src="./out/bundle.js"></script>
+    <script>
+    var canvas = document.getElementById("canvas");
+
+    var pie1 = new Pie({
+        container: canvas,
+        centerPoint: {
+            x: 300,
+            y: 150
+        },
+        radius: 100.5,
+        offSetDegree: 0,
+        takePercent: Math.PI / 4,
+        color: "black",
+        out: false
+    });
+    
+
+    pie1.draw();
+    </script>
+</body>
+
+</html>
