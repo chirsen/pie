@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {
 	//页面入口文件配置
 	entry: {
-		entry: './pie_chart.js', //手机分时图
+		entry: './chart.js', //手机分时图
 	},
 	output: {
         path: path.join(__dirname, 'out'),  //打包输出的路径

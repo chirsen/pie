@@ -12,21 +12,15 @@
     <script>
     var canvas = document.getElementById("canvas");
 
-    var pie1 = new Pie({
+    var chart = new Chart({
+        datas: [0.2, 0.3, 0.5],
+        colors: ["green", "red", "yellow"],
         container: canvas,
-        centerPoint: {
-            x: 300,
-            y: 150
-        },
-        radius: 100.5,
-        offSetDegree: 0,
-        takePercent: Math.PI / 4,
-        color: "black",
-        out: false
+        radius: 100,
+        centerPoint: {x:300, y:150},
+        backgroundColor: "white"
     });
-    
-
-    pie1.draw();
+    chart.draw();
     </script>
 </body>
 
