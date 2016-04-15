@@ -55,10 +55,10 @@ var pie_chart = (function() {
             if (y > 0) {
                 degree = Math.acos(CosK);
             } else {
-                degree = pi + Math.acos(CosK);
+                degree = 2*pi - Math.acos(CosK);
             }
         }
-
+        console.log(degree);
         return degree;
     }
 
@@ -82,10 +82,7 @@ var pie_chart = (function() {
             this.options.centerPoint.y += (this.options.out ? -1 : 1) * 10 * Math.sin((this.options.endDegree - this.options.startDegree) / 2 + this.options.startDegree);
             this.basicDraw(this.options.color);
             this.options.out = (this.options.out ? false : true);
-        } else {
-
-        }
-
+        } 
     }
 
     //暴露出的绘图函数
