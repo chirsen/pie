@@ -203,8 +203,8 @@
 	    pie_chart.prototype.click = function(x, y) {
 	        if (this.inArea(x, y)) {
 	            this.clearPie();
-	            this.options.centerPoint.x += (this.options.out ? -1 : 1) * 10 * Math.cos((this.options.endDegree - this.options.startDegree)/2 );
-	            this.options.centerPoint.y += (this.options.out ? -1 : 1) * 10 * Math.sin((this.options.endDegree - this.options.startDegree)/2);
+	            this.options.centerPoint.x += (this.options.out ? -1 : 1) * 10 * Math.cos((this.options.endDegree - this.options.startDegree)/2 + this.options.startDegree );
+	            this.options.centerPoint.y += (this.options.out ? -1 : 1) * 10 * Math.sin((this.options.endDegree - this.options.startDegree)/2+ this.options.startDegree);
 	            this.basicDraw(this.options.color);
 	            this.options.out = (this.options.out ? false : true);
 	        } else {

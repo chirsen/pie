@@ -1,6 +1,6 @@
 var Pie = require('./pie_chart.js');
 var extend = require('extend');
-
+//绘制饼状图
 var chart = (function() {
     function chart(options) {
         this.defaultOptions = {
@@ -50,7 +50,7 @@ var chart = (function() {
 
     }
 
-
+    //对给的数据进行处理
     function dataDeal(datas, colors) {
         var pies = [];
         var offsetDegree = 0;

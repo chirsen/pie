@@ -34,28 +34,28 @@ var pie_chart = (function() {
         ctx.restore();
     };
     //计算点击产生的角度
-    function getDegree(x, y){
+    function getDegree(x, y) {
         var pi = Math.PI;
         var degree = 0;
         var k = 0;
-        var c = Math.sqrt(x*x + y*y);
-        var SinK = y/c;
-        var CosK = x/c;
-        if(x == 0 && y > 0){
-            degree = pi/2;
-        }else if(x == 0 && y < 0){
-            degree = 3*pi/2;
-        }else if(x > 0 && y == 0){
+        var c = Math.sqrt(x * x + y * y);
+        var SinK = y / c;
+        var CosK = x / c;
+        if (x == 0 && y > 0) {
+            degree = pi / 2;
+        } else if (x == 0 && y < 0) {
+            degree = 3 * pi / 2;
+        } else if (x > 0 && y == 0) {
             degree = 0;
-        }else if(x < 0 && y == 0){
+        } else if (x < 0 && y == 0) {
             degree = pi;
         }
 
-        if(c != 0){
-            if(y > 0){
+        if (c != 0) {
+            if (y > 0) {
                 degree = Math.acos(CosK);
-            }else{
-                degree = pi+Math.acos(CosK);
+            } else {
+                degree = pi + Math.acos(CosK);
             }
         }
 
@@ -64,21 +64,22 @@ var pie_chart = (function() {
 
     //判断canvas被点击，传送过来的x, y，是否在当前扇形区域内
     pie_chart.prototype.inArea = function(screen_x, screen_y) {
-        var x = screen_x - this.options.centerPoint.x;
-        var y = screen_y - this.options.centerPoint.y;
-        var r = this.options.radius;
-        if (x * x + y * y <= r * r && (getDegree(x, y) > this.options.startDegree && getDegree(x, y) < this.options.endDegree ) ) {
-            
-            return true;
+            var x = screen_x - this.options.centerPoint.x;
+            var y = screen_y - this.options.centerPoint.y;
+            var r = this.options.radius;
+            if (x * x + y * y <= r * r && (getDegree(x, y) > this.options.startDegree && getDegree(x, y) < this.options.endDegree)) {
+
+                return true;
+            }
+            return false;
         }
-        return false;
-    }
-    //点击事件
+        //点击事件
     pie_chart.prototype.click = function(x, y) {
         if (this.inArea(x, y)) {
             this.clearPie();
-            this.options.centerPoint.x += (this.options.out ? -1 : 1) * 10 * Math.cos((this.options.endDegree - this.options.startDegree)/2 );
-            this.options.centerPoint.y += (this.options.out ? -1 : 1) * 10 * Math.sin((this.options.endDegree - this.options.startDegree)/2);
+            //对偏移的处理
+            this.options.centerPoint.x += (this.options.out ? -1 : 1) * 10 * Math.cos((this.options.endDegree - this.options.startDegree) / 2 + this.options.startDegree);
+            this.options.centerPoint.y += (this.options.out ? -1 : 1) * 10 * Math.sin((this.options.endDegree - this.options.startDegree) / 2 + this.options.startDegree);
             this.basicDraw(this.options.color);
             this.options.out = (this.options.out ? false : true);
         } else {
@@ -97,15 +98,11 @@ var pie_chart = (function() {
     pie_chart.prototype.mouseOver = function(x, y) {
             if (this.inArea(x, y)) {
                 this.basicDraw("#eeeeee");
-            }else{
+            } else {
                 this.basicDraw(this.options.color);
             }
         }
-        //鼠标离开（改进黑色为指定颜色）
-    // pie_chart.prototype.mouseLeave = function() {
-    //         this.basicDraw(this.options.color);
-    //     }
-    //     //清空指定区域（这里需要改进白色为背景色）
+        //清空指定区域（这里需要改进白色为背景色）
     pie_chart.prototype.clearPie = function() {
         this.basicDraw("white");
     };
